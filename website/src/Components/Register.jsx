@@ -1,143 +1,124 @@
-import React, { useState } from 'react';
-import './styleregister.css'; // Ensure the styles are imported
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-function Register({ setCurrentPage }) {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [role, setRole] = useState('');
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
-    const [passwordVisible, setPasswordVisible] = useState(false);
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./stylelogin.css";
 
-    const togglePasswordVisibility = () => {
-        setPasswordVisible(!passwordVisible);
-    };
+function Register() {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    location: "",
+  });
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
-    const handleUsernameChange = (e) => {
-        setUsername(e.target.value);
-    };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-    const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
-    };
+  const validateUsername = (username) => {
+    const usernameRegex = /^[a-zA-Z0-9_.]{5,20}$/; // ✅ 5-20 chars, letters, numbers, _, .
+    return usernameRegex.test(username);
+  };
 
-    const handleRoleChange = (e) => {
-        setRole(e.target.value);
-    };
+  const validateEmail = (email) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // ✅ Standard email format
+    return emailRegex.test(email);
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+  const validateLocation = (location) => {
+    const locationRegex = /^[a-zA-Z\s]{3,}$/; // ✅ Min 3 chars, only letters & spaces
+    return locationRegex.test(location);
+  };
 
-        if (username.trim() === '' || password.trim() === '' || role.trim() === '') {
-            setError('All fields are required.');
-            return;
-        }
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    
+    if (!validateUsername(formData.username)) {
+      setMessage("Username must be 5-20 characters and contain only letters, numbers, underscores, or dots.");
+      return;
+    }
+    
+    if (!validateEmail(formData.email)) {
+      setMessage("Please enter a valid email address.");
+      return;
+    }
 
-        try {
-            const response = await fetch(process.env.REACT_APP_REG_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, password, role }),
-            });
+    if (!validateLocation(formData.location)) {
+      setMessage("Location must be at least 3 characters and contain only letters and spaces.");
+      return;
+    }
 
-            const result = await response.json();
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-            if (response.ok) {
-                setSuccess(result.message || 'User registered successfully!');
-                setError('');
-                setTimeout(() => {
-                    setCurrentPage('login'); // Redirect to login after showing success
-                }, 2000);
-            } else {
-                setError(result.message || 'Registration failed. Please try again.');
-                setSuccess('');
-            }
-        } catch (error) {
-            console.error('Network error during registration:', error);
-            setError('There was an error with the registration process.');
-            setSuccess('');
-        }
-    };
+      const data = await response.json();
 
-    return (
-        <div className="register-page-container">
-            <div className="register-form-container">
-                <h2 className="register-form-title">Register</h2>
-                <form id="registrationForm" onSubmit={handleSubmit}>
-                    <div className="register-form-group">
-                        <label htmlFor="username">Username</label>
-                        <input
-                            type="text"
-                            id="username"
-                            name="username"
-                            required
-                            value={username}
-                            onChange={handleUsernameChange}
-                        />
-                    </div>
-                    <div className="register-form-group">
-                        <label htmlFor="password">Password</label>
-                            <div className="password-input-wrapper">
-                                <input
-                                    type={passwordVisible ? 'text' : 'password'} // Toggle between 'text' and 'password'
-                                    id="password"
-                                    name="password"
-                                    required
-                                    value={password}
-                                    onChange={handlePasswordChange}
-                                />
-                                {/* <span
-                                     className="eye-icon"
-                                     onClick={togglePasswordVisibility} // Toggle visibility on click
-                                >
-                                <FontAwesomeIcon icon={passwordVisible ? faEyeSlash : faEye} />
-                        </span> */}
-                        <span id="togglePassword" className="eye-icon" onClick={togglePasswordVisibility}>
-                                {/* Show faEyeSlash when the password is visible and faEye when hidden */}
-                                <FontAwesomeIcon icon={passwordVisible ? faEye : faEyeSlash} />
-                        </span>
-                    </div>
-                </div>
-                    <div className="register-form-group">
-                        <div className="register-role-selection">
-                            <label class='custom-radio'>
-                                <input
-                                    type="radio"
-                                    id="adminRadio"
-                                    name="role"
-                                    value="admin"
-                                    required
-                                    checked={role === 'admin'}
-                                    onChange={handleRoleChange}
-                                />
-                                I am an admin
-                            </label>
-                            <label class='custom-radio'>
-                                <input
-                                    type="radio"
-                                    id="kidRadio"
-                                    name="role"
-                                    value="kid"
-                                    required
-                                    checked={role === 'kid'}
-                                    onChange={handleRoleChange}
-                                />
-                                I am a kid
-                            </label>
-                        </div>
-                    </div>
-                    <div className="register-form-group">
-                        <input type="submit" value="Register Now" className="register-submit-button" />
-                    </div>
-                </form>
-                {error && <p className="register-error-message">{error}</p>}
-                {success && <p className="register-success-message">{success}</p>}
-            </div>
+      if (response.ok) {
+        alert("Successfully Registered! Redirecting to login...");
+        setTimeout(() => {
+          navigate("/"); 
+        }, 500);
+      } else {
+        setMessage(data.error || "Registration failed.");
+      }
+    } catch (error) {
+      setMessage("An error occurred. Please try again.");
+    }
+  };
+
+  return (
+    <div className="background">
+      <form onSubmit={handleRegister} id="registerPage">
+        <h1>Register</h1>
+        <div className="input-box">
+          <label>Username</label>
+          <input 
+            type="text" 
+            name="username" 
+            placeholder="Enter Username" 
+            required 
+            onChange={handleChange} 
+          />
         </div>
-    );
+        <div className="input-box">
+          <label>Email</label>
+          <input 
+            type="email" 
+            name="email" 
+            placeholder="Enter Email" 
+            required 
+            onChange={handleChange} 
+          />
+        </div>
+        <div className="input-box">
+          <label>Password</label>
+          <input type="password" name="password" placeholder="Enter Password" required onChange={handleChange} />
+        </div>
+        <div className="input-box">
+          <label>Location</label>
+          <input 
+            type="text" 
+            name="location" 
+            placeholder="Enter Location" 
+            required 
+            onChange={handleChange} 
+          />
+        </div>
+        <button type="submit" className="button">Sign Up</button>
+        {message && <p style={{ color: "red" }}>{message}</p>}
+
+        <p className="register">
+          Already have an account?  
+          <button type="button" onClick={() => navigate("/")}>Login</button> 
+        </p>
+      </form>
+    </div>
+  );
 }
 
 export default Register;
