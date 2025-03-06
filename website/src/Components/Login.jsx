@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import "./stylelogin.css";
+import "./stylelogin.css"; // Keep login CSS
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -20,20 +20,20 @@ function Login() {
     e.preventDefault();
     setLoading(true);
     setError("");
-  
+
     try {
       const response = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
       });
-  
+
       const data = await response.json();
       setLoading(false);
-  
+
       if (response.ok) {
         alert("Login Successful!");
-        navigate("/play");  // ✅ Redirect to Play page after login
+        navigate("/home"); // Navigate to Home page
       } else {
         setError(data.error || "Invalid username or password");
       }
@@ -42,9 +42,9 @@ function Login() {
       setError("An error occurred. Please try again.");
     }
   };
-  
+
   return (
-    <div className="background">
+    <div className="login-container"> {/* Add this wrapper */}
       {loading && (
         <div className="loading-overlay">
           <div className="spinner"></div>

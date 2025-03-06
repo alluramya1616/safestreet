@@ -1,7 +1,5 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
+/* Apply styles only inside login-container */
+.login-container {
   background: url("../images/loginbackground.jpg") no-repeat center center fixed;
   background-size: cover;
   height: 100vh;
@@ -12,16 +10,8 @@ body {
   padding-right: 10%; /* Adjust to move slightly right */
 }
 
-.background {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: flex-end; /* Move form slightly to the right */
-  align-items: center;
-  padding-right: 10%; /* Adjust to move slightly right */
-}
-
-#loginPage, #registerPage {
+.login-container #loginPage, 
+.login-container #registerPage {
   background: white;
   padding: 40px;
   border-radius: 10px;
@@ -29,33 +19,33 @@ body {
   width: 350px;
 }
 
-h1 {
+.login-container h1 {
   text-align: center;
   color: #333;
 }
 
-.input-box {
+.login-container .input-box {
   margin-bottom: 15px;
 }
 
-.input-box label {
+.login-container .input-box label {
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
 }
 
-.input-box input {
+.login-container .input-box input {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-.password-container {
+.login-container .password-container {
   position: relative;
 }
 
-.password-container .eye {
+.login-container .password-container .eye {
   position: absolute;
   right: 10px;
   top: 50%;
@@ -63,14 +53,14 @@ h1 {
   cursor: pointer;
 }
 
-.remember-forgot {
+.login-container .remember-forgot {
   display: flex;
   justify-content: space-between;
   font-size: 14px;
   margin-bottom: 20px;
 }
 
-.button {
+.login-container .button {
   width: 100%;
   padding: 10px;
   background: #4facfe;
@@ -81,27 +71,27 @@ h1 {
   cursor: pointer;
 }
 
-.button:hover {
+.login-container .button:hover {
   background: #00c2fe;
 }
 
-.register {
+.login-container .register {
   text-align: center;
   margin-top: 15px;
 }
 
-.register button {
+.login-container .register button {
   background: none;
   border: none;
   color: #4facfe;
   cursor: pointer;
 }
 
-.register button:hover {
+.login-container .register button:hover {
   text-decoration: underline;
 }
 
-.loading-overlay {
+.login-container .loading-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -113,7 +103,7 @@ h1 {
   align-items: center;
 }
 
-.spinner {
+.login-container .spinner {
   width: 50px;
   height: 50px;
   border: 5px solid rgba(255, 255, 255, 0.3);
