@@ -32,7 +32,6 @@ function Login() {
       setLoading(false);
 
       if (response.ok) {
-        alert("Login Successful!");
         navigate("/home"); // Navigate to Home page
       } else {
         setError(data.error || "Invalid username or password");

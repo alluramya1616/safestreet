@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import "./styleregister.css"; // Updated CSS file
 
 function Register() {
@@ -10,7 +12,12 @@ function Register() {
     location: "",
   });
   const [message, setMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -67,7 +74,18 @@ function Register() {
         </div>
         <div className="input-box">
           <label>Password</label>
-          <input type="password" name="password" placeholder="Enter Password" required onChange={handleChange} />
+          <div className="password-container">
+            <input 
+              type={showPassword ? "text" : "password"} 
+              name="password" 
+              placeholder="Enter Password" 
+              required 
+              onChange={handleChange} 
+            />
+            <span className="eye" onClick={togglePasswordVisibility}>
+              <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
+            </span>
+          </div>
         </div>
         <div className="input-box">
           <label>Location</label>
