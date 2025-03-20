@@ -60,29 +60,6 @@
 .cta-button:hover {
   background-color: #e6b800;
 }
-
-/* Benefits Section */
-.benefits-section {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin: 20px 0;
-}
-
-.benefit {
-  background: white;
-  padding: 20px;
-  margin: 10px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 300px;
-}
-
-.benefit h2 {
-  color: #005bb5;
-  font-size: 1.2rem;
-}
-
 /* How It Works Section */
 .how-it-works {
   background: white;
@@ -106,68 +83,56 @@
 }
 .image-section {
   display: flex;
-  justify-content: center;
   align-items: center;
-  position: relative;
-  margin: 20px auto;
+  justify-content: center;
+  gap: 15px; /* Adds spacing between elements */
+  margin: 40px auto;
 }
 
 .image-container {
-  position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 20px; /* Consistent spacing */
 }
 
 .benefit-image {
-  max-width: 600px; /* Increase size of the image */
+  width: 300px; /* Set a standard size */
   height: auto;
-  border: 2px solid purple;
+  border-radius: 10px;
+  border: 2px solid #ccc;
 }
 
-.analysis-box {
-  border: 3px solid red;
-  padding: 15px;
-  background: white;
-  width: 320px; /* Keep box smaller than the image */
-  margin-left: 50px; /* Space between image and box */
-  animation: blinkBorder 1s infinite;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+.video {
+  width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Create a diagonal arrow from pothole to analysis box */
 .arrow {
-  position: absolute;
-  width: 100px; /* Length of arrow */
-  height: 2px;
-  background-color: blue;
-  transform: rotate(15deg); /* Adjust angle */
-  left: 55%; /* Position start at pothole */
-  top: 65%; /* Adjust arrow starting point */
-}
-
-.arrow::after {
-  content: "";
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  width: 10px;
-  height: 10px;
-  border-top: 3px solid blue;
-  border-right: 3px solid blue;
-  transform: rotate(45deg);
-}
-@keyframes blinkBorder {
-  0% { border-color: red; opacity: 1; }
-  50% { border-color: transparent; opacity: 0.5; }
-  100% { border-color: red; opacity: 1; }
+  font-size: 30px;
+  color: #333;
+  font-weight: bold;
 }
 
 .analysis-box {
-  border: 3px solid red;  /* Initial border */
+  background: #fff;
   padding: 15px;
-  background: white;
-  width: 320px; /* Adjust width */
-  margin-left: 50px; /* Space between image and box */
-  animation: blinkBorder 1s infinite; /* Blinking animation */
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); /* Slight red glow */
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.analysis-box:hover {
+  transform: scale(1.05);
+}
+
+.analysis-box p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.analysis-box strong {
+  color: #d9534f;
 }
