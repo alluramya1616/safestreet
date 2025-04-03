@@ -3,6 +3,7 @@ import Login from "./Components/Login";
 import Register from "./Components/Register";
 import Home from "./Components/Home";
 import Dashboard from "./Components/Dashboard"; // Import Dashboard component
+import ReportDetails from "./Components/ReportDetails";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} /> {/* Added Dashboard route */}
+        <Route path="/report/:id" element={<ReportDetails />} />
       </Routes>
     </Router>
   );

@@ -8,7 +8,7 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: "*" })); // Allow all origins for testing
 
 // ✅ Connect to MongoDB
 mongoose
@@ -72,6 +72,19 @@ app.get("/api/reports", async (req, res) => {
     res.json(reports);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch reports" });
+  }
+});
+
+// ✅ API: Get a Single Report by reportId or _id
+app.get("/api/reports/:id", async (req, res) => {
+  try {
+    const report = await Report.findOne({ $or: [{ reportId: req.params.id }, { _id: req.params.id }] });
+    if (!report) {
+      return res.status(404).json({ error: "Report not found" });
+    }
+    res.json(report);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch report details", details: error.message });
   }
 });
 
