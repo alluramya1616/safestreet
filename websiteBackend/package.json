@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "loginserver.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "start": "concurrently \"node webappserver.js\" \"node loginserver.js\""
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,10 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.11.0"
+    "mongoose": "^8.11.0",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
   }
 }

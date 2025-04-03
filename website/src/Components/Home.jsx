@@ -75,11 +75,76 @@
 // };
 
 // export default HomePage; 
+// import React from "react";
+// import { Link } from "react-router-dom";
+// import "./Home.css"; // Import the CSS file
+// import websiteImg from "../images/website.jpg";
+// import video from "../images/robot.jpg"
+// const HomePage = () => {
+//   return (
+//     <div className="home-container">
+//       {/* Navbar */}
+//       <nav className="navbar">
+//         <div className="logo">SafeStreet</div>
+//         <div className="nav-links">
+//           <Link to="/home">Home</Link>
+//           <Link to="/dashboard">Dashboard</Link>
+//           <Link to="/about">About Us</Link>
+//           <Link to="/help">Help</Link>
+//           <Link to="/" onClick={() => localStorage.removeItem("token")}>Log Out</Link>
+//         </div>
+//       </nav>
+
+//       {/* Hero Section */}
+//       <header className="hero-section">
+//         <h1>Smart Road Maintenance for Safer Cities</h1>
+//         <p>AI-powered detection and reporting system for road authorities.</p>
+//         <Link to="/dashboard" className="cta-button">Access Dashboard</Link>
+//       </header>
+//       {/* Image, Arrows, Video, and Analysis Box Section */}
+//       <section className="image-section">
+//         <div className="image-container">
+//           {/* Image */}
+//           <img src={websiteImg} alt="Road Monitoring Example" className="benefit-image" />
+          
+//           {/* First Arrow */}
+//           <span className="arrow">→</span>
+//           <img src={video} alt="robot" className="benefit-image" />
+//           {/* Second Arrow */}
+//           <span className="arrow">→</span>
+          
+//           {/* Blinking Analysis Box */}
+//           <div className="analysis-box">
+//             <p><strong>Type:</strong> Pothole with surrounding cracks</p>
+//             <p><strong>Severity:</strong> High (visible depth and water retention)</p>
+//             <p><strong>Risks:</strong> Vehicle damage (tires, suspension), road safety hazard</p>
+//             <p><strong>Cause:</strong> Water seepage, freeze-thaw cycles, heavy traffic</p>
+//             <p><strong>Recommended Action:</strong> Immediate patching, long-term resurfacing, improved drainage</p>
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* How It Works Section */}
+//       <section className="how-it-works">
+//         <h2>How SafeStreet Works</h2>
+//         <ul>
+//           <li><strong>1. Capture & Upload:</strong> Field teams report road damage via the mobile app.</li>
+//           <li><strong>2. AI Analysis:</strong> ViT model classifies damage severity.</li>
+//           <li><strong>3. Automated Reporting:</strong> Reports sent to road authorities.</li>
+//           <li><strong>4. Dashboard Insights:</strong> Monitor, plan, and manage repairs.</li>
+//         </ul>
+//       </section>
+//     </div>
+//   );
+// };
+
+// export default HomePage;
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Home.css"; // Import the CSS file
+import "./Home.css"; // Keep the same CSS file
 import websiteImg from "../images/website.jpg";
-import video from "../images/robot.jpg"
+import video from "../images/robot.jpg";
+
 const HomePage = () => {
   return (
     <div className="home-container">
@@ -91,7 +156,9 @@ const HomePage = () => {
           <Link to="/dashboard">Dashboard</Link>
           <Link to="/about">About Us</Link>
           <Link to="/help">Help</Link>
-          <Link to="/" onClick={() => localStorage.removeItem("token")}>Log Out</Link>
+          <Link to="/" onClick={() => localStorage.removeItem("token")}>
+            Log Out
+          </Link>
         </div>
       </nav>
 
@@ -101,6 +168,7 @@ const HomePage = () => {
         <p>AI-powered detection and reporting system for road authorities.</p>
         <Link to="/dashboard" className="cta-button">Access Dashboard</Link>
       </header>
+
       {/* Image, Arrows, Video, and Analysis Box Section */}
       <section className="image-section">
         <div className="image-container">
