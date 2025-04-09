@@ -1,44 +1,56 @@
 /* Apply styles only inside login-container */
 .login-container {
-  background: url("../images/loginbackground.jpg") no-repeat center center fixed;
+  background: url("../images/loginbackground.png") no-repeat center center fixed;
   background-size: cover;
   height: 100vh;
   display: flex;
-  justify-content: flex-end; /* Move forms slightly to the right */
-  align-items: center;
+  justify-content: center; /* Keep it centered horizontally */
+  align-items: flex-start; /* Move it up */
+  padding-top: 10vh; /* Adjust this value to move it up */
   overflow: hidden; /* Prevent scrolling */
-  padding-right: 10%; /* Adjust to move slightly right */
 }
 
 .login-container #loginPage, 
 .login-container #registerPage {
-  background: white;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background: none; /* Remove box background */
+  box-shadow: none; /* Remove shadow */
+  border-radius: 0; /* Remove border radius */
+  padding: 20px;
   width: 350px;
+  text-align: center;
 }
 
 .login-container h1 {
-  text-align: center;
-  color: #333;
+  color: white; /* Make text visible */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  font-size: 28px;
+  margin-bottom: 20px;
 }
 
 .login-container .input-box {
   margin-bottom: 15px;
+  text-align: left;
 }
 
 .login-container .input-box label {
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
+  color: white;
 }
 
 .login-container .input-box input {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.2); /* Slightly transparent fields */
+  color: white;
+  border: 1px solid white;
   border-radius: 5px;
+  outline: none;
+}
+
+.login-container .input-box input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .login-container .password-container {
@@ -51,6 +63,7 @@
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
+  color: white;
 }
 
 .login-container .remember-forgot {
@@ -58,17 +71,19 @@
   justify-content: space-between;
   font-size: 14px;
   margin-bottom: 20px;
+  color: white;
 }
 
 .login-container .button {
   width: 100%;
-  padding: 10px;
-  background: #4facfe;
+  padding: 12px;
+  background: #25bf53;
   border: none;
   color: white;
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
+  transition: background 0.3s ease-in-out;
 }
 
 .login-container .button:hover {
@@ -78,6 +93,7 @@
 .login-container .register {
   text-align: center;
   margin-top: 15px;
+  color: white;
 }
 
 .login-container .register button {
@@ -91,6 +107,7 @@
   text-decoration: underline;
 }
 
+/* Loading overlay styles */
 .login-container .loading-overlay {
   position: fixed;
   top: 0;
